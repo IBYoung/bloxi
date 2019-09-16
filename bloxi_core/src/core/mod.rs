@@ -72,6 +72,8 @@ impl Bloxi {
             from: SYSTEM_USER_ID,
             to: self.user_id,
             amount: 100,
+            index: 0,
+            fee: 0,
         });
         let previous_hash = self.last_block().hash();
         self.new_block(proof, previous_hash);
@@ -263,6 +265,8 @@ pub struct Transaction {
     pub from: UserId,
     pub to: UserId,
     pub amount: i128,
+    pub index: i128,
+    pub fee: i128,
 }
 
 #[derive(PartialEq, Eq, Hash, Debug, Clone, Serialize, Deserialize)]
@@ -284,16 +288,22 @@ mod test {
                 from: UserId(i),
                 to: UserId(i + 1),
                 amount: (i + 2) as i128,
+                index: 1,
+                fee: 1,
             });
             bloxi.add_transaction(Transaction {
                 from: UserId(i + 3),
                 to: UserId(i + 4),
                 amount: (i + 5) as i128,
+                index: 1,
+                fee: 1,
             });
             bloxi.add_transaction(Transaction {
                 from: UserId(i + 6),
                 to: UserId(i + 7),
                 amount: (i + 8) as i128,
+                index: 1,
+                fee: 1,
             });
             bloxi.mine();
         }
