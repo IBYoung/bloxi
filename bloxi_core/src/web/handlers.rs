@@ -47,6 +47,21 @@ impl<S: 'static> Handler<S> for NewTransactionHandler {
     }
 }
 
+/*Get Block*/
+pub struct GetBlockHandler(pub Addr<BloxiServerActor>);
+
+json_responder_impl!(BlockResult);
+
+impl<S: 'static> Handler<S> for GetBlockHandler {
+    type Result = Box<Future<Item = Block, Error = Error>>;
+
+    /// Handle request
+    fn handle(&self, _: &HttpRequest<S>) -> Box<Future<Item = Block, Error = Error>> {
+        let f = self.0.send(Mine).map_err(|e| ErrorInternalServerError(e));
+        Box::new(f)
+    }
+}
+
 pub struct MineHandler(pub Addr<BloxiServerActor>);
 
 json_responder_impl!(Block);
