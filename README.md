@@ -16,7 +16,7 @@ Mostly done as an exercise
 
 * `GET /id`: Returns the randomly generated node id
 * `GET /chain`: Returns the current block chain
-* `POST /transaction`: Adds a Transaction (e.g. `{ "from": 1, "to": 2, "amount": 100 }`)
+* `POST /transaction`: Adds a Transaction (e.g. `{"from": 112, "to": 3, "amount": 100,"index":1,"fee":123}`)
 * `POST /mine`: Mines a block based on the current transactions
 * `POST /node`: Adds a node (e.g. `{ "address": "http://127.0.0.1:8081" }`)
 * `POST /reconcile`: "Reconciles" the local chain with all known nodes
