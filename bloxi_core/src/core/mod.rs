@@ -105,6 +105,10 @@ impl Bloxi {
         self.chain.last().expect("Block chain with no blocks!")
     }
 
+    pub fn get_block(&self, height: u8) -> &Block {
+        self.chain.blocks[height].expect("the block is not match any records")
+    }
+
     pub fn register_node(&mut self, node: Node) -> &HashSet<Node> {
         self.nodes.insert(node);
         &self.nodes
