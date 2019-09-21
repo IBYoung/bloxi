@@ -53,11 +53,11 @@ pub struct GetBlockHandler(pub Addr<BloxiServerActor>);
 json_responder_impl!(BlockResult);
 
 impl<S: 'static> Handler<S> for GetBlockHandler {
-    type Result = Box<Future<Item = Block, Error = Error>>;
+    type Result = Box<Future<Item = BlockResult, Error = Error>>;
 
     /// Handle request
-    fn handle(&self, _: &HttpRequest<S>) -> Box<Future<Item = Block, Error = Error>> {
-        let f = self.0.send(Mine).map_err(|e| ErrorInternalServerError(e));
+    fn handle(&self, _: &HttpRequest<S>) -> Box<Future<Item = BlockResult, Error = Error>> {
+        let f = self.0.send(GetBlock{height:1}).map_err(|e| ErrorInternalServerError(e));
         Box::new(f)
     }
 }

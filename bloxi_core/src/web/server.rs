@@ -27,6 +27,9 @@ impl Server {
         server::new(move || {
             let get_id_handler = GetIdHandler(actor.clone());
             let new_tx_handler = NewTransactionHandler(actor.clone());
+
+            let get_blk_handler = GetBlockHandler(actor.clone());
+
             let mine_handler = MineHandler(actor.clone());
             let get_chain_handler = GetChainHandler(actor.clone());
             let add_node_handler = AddNodeHandler(actor.clone());
@@ -40,6 +43,9 @@ impl Server {
                 })
                 .resource("/transaction", move |r| {
                     r.method(http::Method::POST).h(new_tx_handler)
+                })
+                .resource("/block", move |r| {
+                    r.method(http::Method::POST).h(get_blk_handler)
                 })
                 .resource("/mine", move |r| {
                     r.method(http::Method::POST).h(mine_handler)
