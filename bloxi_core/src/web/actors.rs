@@ -72,17 +72,6 @@ impl Handler<GetChain> for BloxiServerActor {
     }
 }
 
-pub struct GetBlock;
-simple_req_resp_impl!(GetBlock, Block);
-
-impl Handler<GetBlock> for BloxiServerActor {
-    type Result = Block;
-
-    fn handle(&mut self, _: GetBlock, _: &mut Self::Context) -> Self::Result {
-        self.bloxi.get_block(1).clone()
-    }
-}
-
 pub struct AddNode(pub Node);
 
 #[derive(Serialize)]
