@@ -1,5 +1,6 @@
 use crate::core::BlockIndex;
 use crate::core::Transaction;
+use crate::core::Block;
 use uuid::Uuid;
 
 #[derive(Deserialize, Serialize, Copy, Clone, Eq, PartialEq, Debug)]
@@ -20,7 +21,5 @@ pub struct NewTransactionResult {
 
 #[derive(Deserialize, Serialize, Clone, Eq, PartialEq, Debug)]
 pub struct BlockResult {
-    pub height: i128,
-    pub txs: Vec<Transaction>,
-    pub size: u8,
+    pub block:Block
 }

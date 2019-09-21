@@ -49,6 +49,24 @@ impl Handler<NewTransaction> for BloxiServerActor {
     }
 }
 
+
+pub struct GetBlock {
+    pub height: usize,
+}
+
+simple_req_resp_impl!(GetBlock,BlockResult);
+
+impl Handler<GetBlock> for BloxiServerActor {
+    type Result = BlockResult;
+
+    fn handle(&mut self,
+              GetBlock { height }: GetBlock,
+              _: &mut Self::Context, ) -> Self::Result {
+        BlockResult { block: self.bloxi.get_block(height).clone(), }
+    }
+}
+
+
 pub struct Mine;
 simple_req_resp_impl!(Mine, Block);
 
@@ -96,7 +114,7 @@ impl Message for Reconcile {
 }
 
 impl Handler<Reconcile> for BloxiServerActor {
-    type Result = Box<Future<Item = Chain, Error = ()>>;
+    type Result = Box<Future<Item=Chain, Error=()>>;
 
     fn handle(&mut self, _: Reconcile, context: &mut Self::Context) -> Self::Result {
         let self_addr = context.address().clone();

@@ -209,6 +209,12 @@ pub struct Block {
     previous_hash: BlockHash,
 }
 
+#[derive(PartialEq, Eq, Debug, Serialize, Deserialize, Clone)]
+pub struct Blk {
+    pub block: Block,
+    pub size: usize,
+}
+
 impl Block {
     fn hash(&self) -> BlockHash {
         let mut hasher = Sha256::new();
