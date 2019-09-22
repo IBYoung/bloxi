@@ -17,7 +17,7 @@ Mostly done as an exercise
 * `GET /id`: Returns the randomly generated node id
 * `GET /chain`: Returns the current block chain
 
-* `POST /block`: Adds a Transaction (e.g. `{"from": 112, "to": 3, "amount": 100,"index":1,"fee":123}`)
+* `POST /block`: Returns the block (e.g. `{"height": 2}`)
 
 * `POST /transaction`: Adds a Transaction (e.g. `{"from": 112, "to": 3, "amount": 100,"index":1,"fee":123}`)
 * `POST /mine`: Mines a block based on the current transactions
